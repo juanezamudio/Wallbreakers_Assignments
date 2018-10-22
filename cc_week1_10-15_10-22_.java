@@ -338,4 +338,73 @@ class Solution {
         
         return prefix;
     }
+
+    /**
+     * This problem was tricky although I think I have completed it in the past.
+     * I think what was tricky is that the we needed to ignore leading zeros
+     * in the number. In addition, I have rarely worked with bitwise operations
+     * in Java and so it was new for me to use to-binary library static functions.
+     * 
+     * Time Estimate: 20 minutes
+     */
+    public int findComplement(int num) {
+        return ~num & (Integer.highestOneBit(num) - 1);
+    }
+
+    /**
+     * Much like the last problem, this was kind of tricky. Again, I think it is
+     * getting used to the Integer class library static functions and knowing
+     * what they do. They seem to be very helpful with bitwise operations.
+     * 
+     * Time Estimate: 15 minutes
+     */
+    public int hammingDistance(int x, int y) {
+        return Integer.bitCount(x^y);
+    }
+
+    /**
+     * This one was pretty hard but I was able to solve it through some work-
+     * -around methods, not complete bitwise operations. That said, there are
+     * more optimal ways to do this but this gives a pretty straight-forward
+     * approach to this problem
+     * 
+     * Time Estimate: 25 minutes
+     */
+    public int binaryGap(int N) {
+        String binString = Integer.toBinaryString(N);
+        
+        if (N == 0 || Integer.bitCount(N) == 1) {return 0;}
+        
+        int max = 0;
+        int count = 1;
+        
+        for (int i = 0; i < binString.length(); i++) {
+            if (binString.charAt(i) == '1') {
+                if (max <= count) {
+                    max = count;
+                }
+                count = 1;
+            } else {
+                count++;
+            }
+        }
+        
+        return max;
+    }
+
+    /**
+     * This was easiest problem out of the set but it is mostly because
+     * I had seen it before. I know that a number XOR itself gives zero.
+     * Thus, we XOR every element in the list and it returns the one that
+     * is the single number in the list.
+     * 
+     * Time Estimate: 2 minutes
+     */
+    public int singleNumber(int[] nums) {
+        int result = 0;
+        
+        for (int n : nums) {result ^= n;}
+        
+        return result;
+    }
 }
